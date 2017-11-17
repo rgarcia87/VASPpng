@@ -12,7 +12,7 @@
 # 4. Remember to write in the terminal: for j in `ls *.vasp` ; do v2xsf $j ; done
 #
 # remove old tcl scripts (this section needs to be fix)
-if [ -e epsprinting.tcl ] ; then echo "removing old epsprinting.tcl" ; rm -f epsprinting.tcl ; fi
+if [ -e printing.tcl ] ; then echo "removing old printing.tcl" ; rm -f printing.tcl ; fi
 #
 # comprobates if you have *.xsf.gz files
 if [ -z `ls *.vasp.xsf.gz` ] ; then 
@@ -29,7 +29,7 @@ fi
 # Loop for side view:
 for i in `ls *.vasp.xsf.gz`
 do   
-cat >>epsprinting.tcl<<!
+cat >>printing.tcl<<!
 scripting::open --xsf $i
 scripting::displayWindow resize 800 800
 xc_newvalue .mesa 8  0 1.000000 1.000000 1.000000
@@ -98,7 +98,7 @@ done
 # Loop for top view:
 for i in `ls *.vasp.xsf.gz`
 do                              # resize 640 480
-cat >>epsprinting.tcl<<!
+cat >>printing.tcl<<!
 scripting::open --xsf $i
 scripting::displayWindow resize 800 800
 xc_newvalue .mesa 8  0 1.000000 1.000000 1.000000
@@ -163,4 +163,4 @@ scripting::printToFile ${i%\.vasp.xsf.gz}_t.png
 !
 done
 
-echo "Now run XCrySDen in script mode: xcrysden -s epsprinting.tcl"
+echo "Now run XCrySDen in script mode: xcrysden -s printing.tcl"
